@@ -4,15 +4,15 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <base href="http://mbostock.github.io/d3/tutorial/">
     <title>d3.js ~ Three Little Circles</title>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
     <link rel="stylesheet" href="http://localhost:8888/ddd.css" type="text/css">
-    <script src="http://localhost:8888/ddd.js" type="text/javascript"></script>
+    <script src="http://localhost:8888/ddd.js"></script>
     <style type="text/css">
     @import url("../style.css?1.10.0");
         @import url("../syntax.css?1.6.0");
     </style>
     <style type="text/css">
-img.c1 {position:absolute;top:0;right:0;border:0;}
+img.c1 {position:fixed;top:0;right:0;border:0;}
     </style>
 </head>
 <body>
@@ -28,69 +28,65 @@ img.c1 {position:absolute;top:0;right:0;border:0;}
             <div class="sidebar">
                 <h1>d3.js</h1>
             </div>
-            <h1 id='three_little_circles'>Three Little Circles</h1>
+            <h1 id="three_little_circles">Three Little Circles</h1>
             <p>Once upon a time, there were three little circles. This tutorial shows you how to manipulate them using selections.</p>
-            <h2 id='selecting_elements'>Selecting Elements</h2>
+            <h2 id="selecting_elements">Selecting Elements</h2>
             <p>The <a
-            href='https://github.com/mbostock/d3/wiki/Selections#selectAll'>selectAll</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#selectAll">selectAll</a>
             operator takes a <a
-            href='http://www.w3.org/TR/CSS2/selector.html'>selector</a> string,
+            href="http://www.w3.org/TR/CSS2/selector.html">selector</a> string,
             such as “circle”, and returns a selection:</p>
-            <div class='chart' id='chart-2'>
-                <pre class='code'>
-var circle = svg.selectAll("circle");
+            <div class="chart" id="chart-2">
+                <pre class="code">
+var circle = svg.selectAll('circle');
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex1()
-            </script>
+            </div>
+            <script>ex1();</script>
             <p>Once we have a selection, we can apply various operators to the
             selected elements. For example, we might change the fill color
             using <a
-            href='https://github.com/mbostock/d3/wiki/Selections#style'>style</a>,
+            href="https://github.com/mbostock/d3/wiki/Selections#style">style</a>,
             and the radius and the <em>y</em>-position using <a
-            href='https://github.com/mbostock/d3/wiki/Selections#attr'>attr</a>:</p>
-            <div class='chart' id='chart-3'>
-                <pre class='code'>
-circle.style("fill", "steelblue");
-circle.attr("cy", 90);
-circle.attr("r", 30);
+            href="https://github.com/mbostock/d3/wiki/Selections#attr">attr</a>:</p>
+            <div class="chart" id="chart-3">
+                <pre class="code">
+circle.style('fill', 'steelblue');
+circle.attr('cy', 90);
+circle.attr('r', 30);
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex2()
-            </script>
+            </div>
+            <script>ex2();</script>
             <p>We can also compute the attribute values dynamically, using
             functions rather than constants. For example, maybe we want to set
             the <em>x</em>-coordinate to a random value:</p>
-            <div class='chart' id='chart-4'>
-                <pre class='code'>
-circle.attr("cx", function() {
+            <div class="chart" id="chart-4">
+                <pre class="code">
+circle.attr('cx', function() {
   return Math.random() * w;
 });
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex3();
-            </script>
+            </div>
+            <script>ex3();</script>
             <p>If you run this example multiple times, you’ll see that the
             attribute is recomputed as a number random number each time. Unlike
             Protovis, D3 doesn’t stash these functions internally; they are run
             once, immediately, and then your code continues. So you can run
             them again or redefine them however you like.</p>
-            <h2 id='binding_data'>Binding Data</h2>
+            <h2 id="binding_data">Binding Data</h2>
             <p>This is beginning to look a lot like <a
-            href='http://jquery.com/'>jQuery</a>. More commonly, though, we
+            href="http://jquery.com/">jQuery</a>. More commonly, though, we
             want to use <em>data</em> to drive the appearance of our circles.
             To do that, we need some data. For the sake of example, let’s
             imagine that each of these circles represents a number: 32, 57 and
             112. The <a
-            href='https://github.com/mbostock/d3/wiki/Selections#data'>data</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#data">data</a>
             operator binds these numbers to the circles:</p>
-            <div class='chart' id='chart-5'>
-                <pre class='code'>
+            <div class="chart" id="chart-5">
+                <pre class="code">
 circle.data([32, 57, 112]);
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex4()
-            </script>
+            </div>
+            <script>ex4();</script>
             <p>All data in D3 is specified as an array of values. Conveniently,
             this mirrors the concept of a selection, which is just an array of
             elements. Notice then how the first number (the first
@@ -101,169 +97,161 @@ ex4()
             This means we visually encode data, or in other words, create a
             visualization! For example, here we set the <em>x</em>-position and
             radius using the data:</p>
-            <div class='chart' id='chart-6'>
-                <pre class='code'>
-circle.attr("cx", function(d) {
+            <div class="chart" id="chart-6">
+                <pre class="code">
+circle.attr('cx', function(d) {
   return d;
 });
-circle.attr("r", function(d) {
+circle.attr('r', function(d) {
   return Math.sqrt(d);
 });
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex5()
-            </script>
+            </div>
+            <script>ex5();</script>
             <p>There’s a second argument to each function you can use: it
             specifies the <em>index</em> of the element within its selection.
             This is a <a
-            href='http://en.wikipedia.org/wiki/Zero-based_numbering'>zero-based</a>
+            href="http://en.wikipedia.org/wiki/Zero-based_numbering">zero-based</a>
             index, and it’s useful for computing offsets or as a simple way of
             identifying individual elements. The argument is optional; if you
             don’t specify it when declaring your function, it will be ignored.
             For example:</p>
-            <div class='chart' id='chart-6b'>
-                <pre class='code'>
-circle.attr("cx", function(d, i) {
+            <div class="chart" id="chart-6b">
+                <pre class="code">
+circle.attr('cx', function(d, i) {
   return i * 100 + 30;
 });
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex6()
-            </script>
+            </div>
+            <script>ex6();</script>
             <p>Here we use the index <em>i</em> to position the elements
             sequentially only the <em>x</em>-dimension. Each element is
             separated by 100 pixels, with an offset of 30 pixels from the left
             side. In SVG, the origin is in the top-left corner.</p> <h2
-            id='creating_elements'>Creating Elements</h2> <p>But what if we had
+            id="creating_elements">Creating Elements</h2> <p>But what if we had
             <em>four</em> numbers to display, rather than three? We wouldn’t
             have enough circles to display all the numbers. When joining data
             to elements, D3 stores the leftover data in the <a
-            href='https://github.com/mbostock/d3/wiki/Selections#enter'>enter</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#enter">enter</a>
             selection. (The terms “enter” and “exit” are adopted from stage
             terminology.) Here, the fourth number 293 remains in the enter
             selection, because we only have three circle elements:</p>
-            <div class='chart' id='chart-7'>
-                <pre class='code'>
-var circle = svg.selectAll("circle")
+            <div class="chart" id="chart-7">
+                <pre class="code">
+var circle = svg.selectAll('circle')
     .data([32, 57, 112, 293]);
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex7()
-            </script>
+            </div>
+            <script>ex7();</script>
             <p>Using the enter selection, we can create new circles for any
             missing data. Each new circle is already bound to the data, so we
             can use data to compute attributes and styles:</p>
-            <div class='chart' id='chart-8'>
-                <pre class='code'>
-var enter = circle.enter().append("circle");
-enter.attr("cy", 90);
-enter.attr("cx", 160);
-enter.attr("r", function(d) {
+            <div class="chart" id="chart-8">
+                <pre class="code">
+var enter = circle.enter().append('circle');
+enter.attr('cy', 90);
+enter.attr('cx', 160);
+enter.attr('r', function(d) {
   return Math.sqrt(d);
 });
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex8()
-            </script>
+            </div>
+            <script>ex8();</script>
             <p>Taking this to the next logical step, then, what if we have
             <em>no</em> existing elements? Meaning, what if the document is
             empty? Say we start with an empty page, and we want to create new
             circles that correspond to our data? Then we’re joining data to an
             empty selection, and all of the data ends up in <em>enter</em>:</p>
-            <div class='chart' id='chart-9'>
-                <pre class='code'>
-var enter = circle.enter().append("circle");
-enter.attr("cy", 90);
-enter.attr("cx", function(d) {
+            <div class="chart" id="chart-9">
+                <pre class="code">
+var enter = circle.enter().append('circle');
+enter.attr('cy', 90);
+enter.attr('cx', function(d) {
   return d;
 });
-enter.attr("r", function(d) {
+enter.attr('r', function(d) {
   return Math.sqrt(d);
 });
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex9()
-            </script>
+            </div>
+            <script>ex9();</script>
             <p>This pattern is so common, you’ll often see the <a
-            href='https://github.com/mbostock/d3/wiki/Selections#selectAll'>selectAll</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#selectAll">selectAll</a>
             + <a
-            href='https://github.com/mbostock/d3/wiki/Selections#data'>data</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#data">data</a>
             + <a
-            href='https://github.com/mbostock/d3/wiki/Selections#enter'>enter</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#enter">enter</a>
             + <a
-            href='https://github.com/mbostock/d3/wiki/Selections#append'>append</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#append">append</a>
             operators called sequentially, one immediately after the other.
             Despite it being common, keep in mind that this is just one special
             case of a data join; we’ve already seen another common case
             (selecting elements for update) and we’ll see other interesting
             cases to consider in a bit.</p> <p>Another technique you can use to
             make your code more concise is <a
-            href='http://en.wikipedia.org/wiki/Method_chaining'>method
+            href="http://en.wikipedia.org/wiki/Method_chaining">method
             chaining</a>. Each operator in D3 returns the current selection, so
             you can apply multiple operators sequentially. For example, the
             above code can be rewritten:</p>
-            <div class='chart' id='chart-10'>
-                <pre class='code'>
-svg.selectAll("circle")
+            <div class="chart" id="chart-10">
+                <pre class="code">
+svg.selectAll('circle')
     .data([32, 57, 112, 293])
-  .enter().append("circle")
-    .attr("cy", 90)
-    .attr("cx", String)
-    .attr("r", Math.sqrt);
+  .enter().append('circle')
+    .attr('cy', 90)
+    .attr('cx', String)
+    .attr('r', Math.sqrt);
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex10()
-            </script>
+            </div>
+            <script>ex10();</script>
             <p>As you can see, the code is made even smaller using built-in
             JavaScript functions, rather than defining anonymous ones. The
             built-in <a
-            href='https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String'>String</a>
+            href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String">String</a>
             method, for example, is a shorthand way of using JavaScript’s
             default string conversion to compute the attribute value from the
             associated data. Similarly, we can plug in <a
-            href='https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/sqrt'>Math.sqrt</a>
+            href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/sqrt">Math.sqrt</a>
             to set the radius attribute as the square root of the associated
             data. This technique of plugging in reusable functions to compute
             attribute values is used extensively in D3, particularly in
             conjunction with <a
-            href='https://github.com/mbostock/d3/wiki/Quantitative-Scales'>scales</a>
+            href="https://github.com/mbostock/d3/wiki/Quantitative-Scales">scales</a>
             and <a
-            href='https://github.com/mbostock/d3/wiki/SVG-Shapes'>shapes</a>.</p>
-            <h2 id='destroying_elements'>Destroying Elements</h2>
+            href="https://github.com/mbostock/d3/wiki/SVG-Shapes">shapes</a>.</p>
+            <h2 id="destroying_elements">Destroying Elements</h2>
             <p>Sometimes you have the opposite problem from creation: you have
             too <em>many</em> existing elements, and you want to remove them.
             You can select nodes and <a
-            href='https://github.com/mbostock/d3/wiki/Selections#remove'>remove</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#remove">remove</a>
             them, but more commonly, you’ll use the <a
-            href='https://github.com/mbostock/d3/wiki/Selections#exit'>exit</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#exit">exit</a>
             selection to let D3 determine which elements are exiting the stage.
             The exit selection is the opposite of the enter selection: it
             contains all elements for which there is no corresponding data.</p>
-            <div class='chart' id='chart-11'>
-                <pre class='code'>
-var circle = svg.selectAll("circle")
+            <div class="chart" id="chart-11">
+                <pre class="code">
+var circle = svg.selectAll('circle')
     .data([32, 57]);
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex11()
-            </script>
+            </div>
+            <script>ex11();</script>
             <p>All that’s left to do, then, is to remove the exiting elements:</p>
-            <div class='chart' id='chart-12'>
-                <pre class='code'>
+            <div class="chart" id="chart-12">
+                <pre class="code">
 circle.exit().remove();
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex12()
-            </script>
+            </div>
+            <script>ex12();</script>
             <p>The enter, update and exit selections are computed by the <a
-            href='https://github.com/mbostock/d3/wiki/Selections#data'>data</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#data">data</a>
             operator, and don’t change when you append or remove elements—at
             least until you call <a
-            href='https://github.com/mbostock/d3/wiki/Selections#selectAll'>selectAll</a>
+            href="https://github.com/mbostock/d3/wiki/Selections#selectAll">selectAll</a>
             again. So, if you keep variables around that point to selections
             (such as <code>circle</code>, above), you’ll probably want to
             reselect after adding or removing elements.</p>
-            <h2 id='all_together_now'>All Together Now</h2>
+            <h2 id="all_together_now">All Together Now</h2>
             <p>Putting everything together, consider the three possible outcomes that result from joining data to elements:</p>
             <ol>
                 <li>enter - incoming actors, entering the stage.</li>
@@ -277,21 +265,20 @@ ex12()
             selection. However, by specifying a key function to the data
             operator, we can control exactly how data is bound to elements. And
             in this case, we have both enter and exit.</p>
-            <div class='chart' id='chart-13'>
-                <pre class='code'>
-var circle = svg.selectAll("circle")
+            <div class="chart" id="chart-13">
+                <pre class="code">
+var circle = svg.selectAll('circle')
     .data([32, 57, 293], String);
-circle.enter().append("circle")
-    .attr("cy", 90)
-    .attr("cx", String)
-    .attr("r", Math.sqrt);
+circle.enter().append('circle')
+    .attr('cy', 90)
+    .attr('cx', String)
+    .attr('r', Math.sqrt);
 circle.exit().remove();
 </pre><button>Run</button>
-            </div><script type="text/javascript">
-ex13()
-            </script>
+            </div>
+            <script>ex13();</script>
             <p>Want to learn more about selections and transitions? Read <a
-            href='bar-2.html'>A Bar Chart, Part 2</a> for a practical example
+            href="bar-2.html">A Bar Chart, Part 2</a> for a practical example
             of using enter and exit to display realtime data.</p>
         </div>
         <div class="foot">

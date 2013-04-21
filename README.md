@@ -1,16 +1,7 @@
 # MARKDOWN
-Body text -- `mono text`
+Start tests with
 
-## PRE
-    $ do `it`
+    python -m SimpleHTTPServer 8888 &
 
-### UL
-* [spot link](http://site/) `(http://site/)`
-* [named link][site] `[site]`
-
-#### OL
-0. 0
-0. 0
-
-[site]: http://site/
-
+## View
+[http://localhost:8888/ddd.html](http://localhost:8888/ddd.html)

@@ -4,7 +4,7 @@ var test;
     var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split(''),
         width = 960,
         height = 200,
-        delay = 6666,
+        delay = 2222,
         svg1, svg2, svg3, text;
 
     svg1 = makeSvg();
@@ -62,23 +62,25 @@ var test;
 
     function update2(data) {
         // DATA JOIN new data with old elements, if any.
-        text = svg2.selectAll("text").data(data, function (d) {
+        text = svg2.selectAll('text').data(data, function (d) {
             return d;
         });
         // UPDATE old elements as needed.
         text.attr({
-            class: "update",
+            class: 'update',
         });
         // ENTER Create new elements as needed.
-        text.enter().append("text").attr({
-            class: "enter",
-            dy: ".35em",
+        text.enter().append('text').attr({
+            class: 'enter',
+            dy: '.35em',
         }).text(function (d) {
             return d;
         });
         // ENTER + UPDATE
-        text.attr("x", function (d, i) {
-            return i * 32;
+        text.attr({
+            x: function (d, i) {
+                return i * 32;
+            },
         });
         // EXIT Remove old elements as needed.
         text.exit().remove();
@@ -86,51 +88,52 @@ var test;
 
     function update3(data) {
         // DATA JOIN new data with old elements, if any.
-        var text = svg3.selectAll("text").data(data, function (d) {
+        var text = svg3.selectAll('text').data(data, function (d) {
             return d;
         });
         // UPDATE old elements as needed.
-        text.attr("class", "update").transition().duration(750).attr({
+        text.attr({
+            class: 'update',
+        }).transition().duration(delay/3).attr({
             x: function (d, i) {
                 return i * 32;
             },
         });
         // ENTER Create new elements as needed.
-        text.enter().append("text").attr({
-            class: "enter",
-            dy: ".35em",
+        text.enter().append('text').attr({
+            class: 'enter',
+            dy: '.35em',
             y: - 60,
             x: function (d, i) {
                 return i * 32;
             },
         }).style({
-            "fill-opacity": 1e-6,
+            'fill-opacity': 1e-6,
         }).text(function (d) {
             return d;
-        }).transition().duration(750).attr({
+        }).transition().duration(delay/4).attr({
             y: 0,
         }).style({
-            "fill-opacity": 1,
+            'fill-opacity': 1,
         });
         // EXIT Remove old elements as needed.
         text.exit().attr({
-            class: "exit",
-        }).transition().duration(750).attr({
+            class: 'exit',
+        }).transition().duration(delay/2).attr({
             y: 60,
         }).style({
-            "fill-opacity": 1e-6,
+            'fill-opacity': 1e-6,
         }).remove();
     }
 
     test = function (n) {
-        var fn = eval('update' + n);
-        n = 3;
         // Grab a random sample of letters from the alphabet, in alphabetical order.
         setInterval(function () {
-            fn(shuffle(alphabet).slice(0, random(26)).sort());
+            var a = shuffle(alphabet).slice(3, 13 + random(13)).sort();
+            update1(a);
+            update2(a);
+            update3(a);
         }, delay);
     };
-    test(1);
-    test(2);
-    test(3);
+    test();
 }());
